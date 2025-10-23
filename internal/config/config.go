@@ -2,6 +2,7 @@ package config
 
 import (
 	"github.com/ilyakaznacheev/cleanenv"
+	_ "github.com/joho/godotenv/autoload"
 	"log"
 	"os"
 	"time"
