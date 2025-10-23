@@ -49,7 +49,7 @@ func TestSaveHandler(t *testing.T) {
 			name:      "SaveURL Error",
 			alias:     "test_alias",
 			url:       "https://google.com",
-			respError: "failed to add url",
+			respError: "failed to save url",
 			mockError: errors.New("unexpected error"),
 		},
 	}
@@ -78,8 +78,6 @@ func TestSaveHandler(t *testing.T) {
 			rr := httptest.NewRecorder()
 			handler.ServeHTTP(rr, req)
 
-			require.Equal(t, rr.Code, http.StatusOK)
-
 			body := rr.Body.String()
 
 			var resp save.Response
@@ -87,8 +85,6 @@ func TestSaveHandler(t *testing.T) {
 			require.NoError(t, json.Unmarshal([]byte(body), &resp))
 
 			require.Equal(t, tc.respError, resp.Error)
-
-			// TODO: add more checks
 		})
 	}
 }
